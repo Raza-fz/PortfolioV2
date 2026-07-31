@@ -98,4 +98,101 @@ document.addEventListener('DOMContentLoaded', () => {
 
   counters.forEach(el => countObserver.observe(el));
 
+  // ---------- Cursor spotlight ----------
+  const root = document.documentElement;
+  window.addEventListener('mousemove', (e) => {
+    root.style.setProperty('--mx', `${e.clientX}px`);
+    root.style.setProperty('--my', `${e.clientY}px`);
+  }, { passive: true });
+
+  // ---------- Hero network canvas ----------
+  // Visualizes the actual cross-functional teams from the resume —
+  // Product, Engineering, Policy, CX, Safety, Operations, Risk —
+  // converging on a single center node. Not decoration; the diagram.
+  const canvas = document.getElementById('network-canvas');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (canvas && canvas.getContext) {
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    let w = 0, h = 0;
+
+    const labels = ['Product', 'Engineering', 'Policy', 'CX', 'Safety', 'Operations', 'Risk'];
+    const nodes = labels.map((label, i) => {
+      const angle = (i / labels.length) * Math.PI * 2;
+      return {
+        label,
+        fx: 0.78 + Math.cos(angle) * 0.17,
+        fy: 0.50 + Math.sin(angle) * 0.34,
+        phase: Math.random() * Math.PI * 2,
+      };
+    });
+    const centerNode = { fx: 0.78, fy: 0.5 };
+    const mouse = { x: -9999, y: -9999 };
+
+    const resize = () => {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      w = rect.width; h = rect.height;
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      canvas.style.width = `${w}px`; canvas.style.height = `${h}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    canvas.parentElement.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+    canvas.parentElement.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+
+    const frame = (t) => {
+      ctx.clearRect(0, 0, w, h);
+      const cx = centerNode.fx * w, cy = centerNode.fy * h;
+
+      nodes.forEach((n) => {
+        let nx = n.fx * w + Math.sin(t / 1800 + n.phase) * 8;
+        let ny = n.fy * h + Math.cos(t / 2200 + n.phase) * 8;
+
+        const dx = nx - mouse.x, dy = ny - mouse.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 120) {
+          const force = ((120 - dist) / 120) * 16;
+          nx += (dx / dist) * force;
+          ny += (dy / dist) * force;
+        }
+
+        const grad = ctx.createLinearGradient(cx, cy, nx, ny);
+        grad.addColorStop(0, 'rgba(242, 169, 59, 0.28)');
+        grad.addColorStop(1, 'rgba(143, 174, 139, 0.10)');
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(nx, ny); ctx.stroke();
+
+        ctx.beginPath(); ctx.arc(nx, ny, 3, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(242, 169, 59, 0.85)';
+        ctx.fill();
+
+        ctx.font = '500 11px "IBM Plex Mono", monospace';
+        ctx.fillStyle = 'rgba(163, 156, 143, 0.8)';
+        ctx.textBaseline = 'middle';
+        ctx.textAlign = nx > cx ? 'left' : 'right';
+        ctx.fillText(n.label, nx + (nx > cx ? 10 : -10), ny);
+      });
+
+      ctx.beginPath(); ctx.arc(cx, cy, 5, 0, Math.PI * 2);
+      ctx.fillStyle = '#f2a93b';
+      ctx.fill();
+      ctx.beginPath(); ctx.arc(cx, cy, 9, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(242, 169, 59, 0.35)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      if (!reduceMotion) requestAnimationFrame(frame);
+    };
+
+    requestAnimationFrame(frame);
+  }
+
 });
