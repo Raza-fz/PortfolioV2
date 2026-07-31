@@ -119,19 +119,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const labels = ['Product', 'Engineering', 'Policy', 'CX', 'Safety', 'Operations', 'Risk'];
     const nodes = labels.map((label, i) => {
-      const angle = (i / labels.length) * Math.PI * 2;
+      const angle = (i / labels.length) * Math.PI * 2 - Math.PI / 2;
       return {
         label,
-        fx: 0.78 + Math.cos(angle) * 0.17,
-        fy: 0.50 + Math.sin(angle) * 0.34,
+        fx: 0.5 + Math.cos(angle) * 0.40,
+        fy: 0.5 + Math.sin(angle) * 0.40,
         phase: Math.random() * Math.PI * 2,
       };
     });
-    const centerNode = { fx: 0.78, fy: 0.5 };
+    const centerNode = { fx: 0.5, fy: 0.5 };
     const mouse = { x: -9999, y: -9999 };
 
     const resize = () => {
-      const rect = canvas.parentElement.getBoundingClientRect();
+      const rect = canvas.getBoundingClientRect();
       w = rect.width; h = rect.height;
       canvas.width = w * dpr; canvas.height = h * dpr;
       canvas.style.width = `${w}px`; canvas.style.height = `${h}px`;
@@ -140,25 +140,25 @@ document.addEventListener('DOMContentLoaded', () => {
     resize();
     window.addEventListener('resize', resize);
 
-    canvas.parentElement.addEventListener('mousemove', (e) => {
+    canvas.addEventListener('mousemove', (e) => {
       const rect = canvas.getBoundingClientRect();
       mouse.x = e.clientX - rect.left;
       mouse.y = e.clientY - rect.top;
     });
-    canvas.parentElement.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+    canvas.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
 
     const frame = (t) => {
       ctx.clearRect(0, 0, w, h);
       const cx = centerNode.fx * w, cy = centerNode.fy * h;
 
       nodes.forEach((n) => {
-        let nx = n.fx * w + Math.sin(t / 1800 + n.phase) * 8;
-        let ny = n.fy * h + Math.cos(t / 2200 + n.phase) * 8;
+        let nx = n.fx * w + Math.sin(t / 1800 + n.phase) * 4;
+        let ny = n.fy * h + Math.cos(t / 2200 + n.phase) * 4;
 
         const dx = nx - mouse.x, dy = ny - mouse.y;
         const dist = Math.hypot(dx, dy);
-        if (dist < 120) {
-          const force = ((120 - dist) / 120) * 16;
+        if (dist < 60) {
+          const force = ((60 - dist) / 60) * 10;
           nx += (dx / dist) * force;
           ny += (dy / dist) * force;
         }
