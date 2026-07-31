@@ -43,6 +43,7 @@
 
   <!-- Hero -->
   <section class="hero" id="hero">
+    <canvas id="network-canvas" aria-hidden="true"></canvas>
     <p class="ticket-tag reveal">RAZA-01 · OPEN · PROGRAM &amp; PRODUCT OPERATIONS</p>
     <h1 class="hero__title reveal">Mushahid <span class="ink-accent">Raza</span></h1>
     <h2 class="hero__subtitle reveal">I turn ambiguous operational problems into scalable, outcome-driven systems.</h2>
@@ -77,7 +78,6 @@
         <div class="fact reveal"><span class="fact__k">Operational Excellence</span><span class="fact__v">Process Optimization &amp; Governance</span></div>
         <div class="fact reveal"><span class="fact__k">Program Delivery</span><span class="fact__v">Cross-functional Execution &amp; Launches</span></div>
         <div class="fact reveal"><span class="fact__k">Operational Transformation</span><span class="fact__v">Automation, AI &amp; Continuous Improvement</span></div>
-        <div class="fact reveal"><span class="fact__k">Education</span><span class="fact__v">B.E., ANITS, Visakhapatnam</span></div>
       </div>
     </div>
   </section>
@@ -89,52 +89,39 @@
       <h2 class="section__title">Numbers that support the story, not pad it</h2>
     </div>
 
-    <div class="metrics">
-      <div class="metric reveal">
-        <div class="metric__num"><span class="count" data-target="295"></span><span class="metric__unit">bps</span></div>
-        <p class="metric__label">CSAT improvement</p>
+    <div class="bento">
+      <div class="bento__tile bento__tile--lg reveal">
+        <span class="bento__tag">Automation</span>
+        <div class="bento__num bento__num--lg">$<span class="count" data-target="3.5" data-decimals="1"></span><span class="bento__unit">M+</span></div>
+        <p>Scaled the <strong>Mastermind automation program</strong> to <strong>$3.5M+ in annual savings</strong>, improving the experience of <strong>45,000+ customers</strong>.</p>
       </div>
-      <div class="metric reveal">
-        <div class="metric__num">$<span class="count" data-target="3.5" data-decimals="1"></span><span class="metric__unit">M+</span></div>
-        <p class="metric__label">Automation savings</p>
-      </div>
-      <div class="metric reveal">
-        <div class="metric__num"><span class="count" data-target="45"></span><span class="metric__unit">K+</span></div>
-        <p class="metric__label">Customers positively impacted</p>
-      </div>
-      <div class="metric reveal">
-        <div class="metric__num"><span class="count" data-target="15"></span><span class="metric__unit">+</span></div>
-        <p class="metric__label">Strategic programs delivered / yr</p>
-      </div>
-      <div class="metric reveal">
-        <div class="metric__num"><span class="count" data-target="45"></span><span class="metric__unit">%</span></div>
-        <p class="metric__label">Reduction in incident MTTR</p>
-      </div>
-    </div>
 
-    <div class="highlights">
-      <h3 class="highlights__title reveal">Key Achievements</h3>
-      <div class="highlights-grid">
-        <article class="highlight-card reveal">
-          <div class="highlight-icon">✓</div>
-          <h4>Automation at Scale</h4>
-          <p>Scaled the <strong>Mastermind automation program</strong> to <strong>$3.5M+ in annual savings</strong> and a better experience for <strong>45,000+ customers</strong>.</p>
-        </article>
-        <article class="highlight-card reveal">
-          <div class="highlight-icon">✓</div>
-          <h4>Incident Command</h4>
-          <p>Led real-time incident management across critical platform outages, cutting <strong>MTTR by 45%</strong> while protecting business continuity.</p>
-        </article>
-        <article class="highlight-card reveal">
-          <div class="highlight-icon">✓</div>
-          <h4>Cross-functional Program Delivery</h4>
-          <p>Ran <strong>15+ strategic programs a year</strong> end-to-end — governance, rollout, stakeholder alignment, and post-launch monitoring.</p>
-        </article>
-        <article class="highlight-card reveal">
-          <div class="highlight-icon">✓</div>
-          <h4>People &amp; Performance Leadership</h4>
-          <p>Led a <strong>35-person support team</strong> and <strong>6 team leads</strong> to a <strong>+280 BPS CSAT</strong> gain through KPI-driven coaching.</p>
-        </article>
+      <div class="bento__tile bento__tile--md reveal">
+        <span class="bento__tag">Incident Command</span>
+        <div class="bento__num"><span class="count" data-target="45"></span><span class="bento__unit">%</span></div>
+        <p>Cut incident <strong>MTTR by 45%</strong>, leading real-time response across critical platform outages.</p>
+      </div>
+
+      <div class="bento__tile bento__tile--sm reveal">
+        <div class="bento__num bento__num--sm"><span class="count" data-target="295"></span><span class="bento__unit">bps</span></div>
+        <p>CSAT improvement</p>
+      </div>
+
+      <div class="bento__tile bento__tile--sm reveal">
+        <div class="bento__num bento__num--sm"><span class="count" data-target="15"></span><span class="bento__unit">+</span></div>
+        <p>Programs delivered / yr</p>
+      </div>
+
+      <div class="bento__tile bento__tile--md reveal">
+        <span class="bento__tag">Program Delivery</span>
+        <h4>Cross-functional execution, end to end</h4>
+        <p>Governance, rollout, stakeholder alignment, and post-launch monitoring — the full lifecycle of 15+ programs a year.</p>
+      </div>
+
+      <div class="bento__tile bento__tile--md reveal">
+        <span class="bento__tag">Leadership</span>
+        <div class="bento__num"><span class="count" data-target="280"></span><span class="bento__unit">bps</span></div>
+        <p>Led a <strong>35-person support team</strong> and <strong>6 team leads</strong> to a +280 BPS CSAT gain through KPI-driven coaching.</p>
       </div>
     </div>
   </section>
