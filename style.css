@@ -143,9 +143,17 @@ h1, h2, h3, h4 { font-family: var(--serif); letter-spacing: -0.01em; }
   padding: 150px clamp(20px, 5vw, 60px) 0; max-width: var(--maxw); margin: 0 auto;
   position: relative;
 }
-#network-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+#network-canvas {
+  position: absolute;
+  top: 6%;
+  right: 0;
+  width: min(360px, 32vw);
+  height: min(360px, 32vw);
+  z-index: 0;
+  pointer-events: none;
+}
 .hero > *:not(#network-canvas) { position: relative; z-index: 1; }
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   #network-canvas { display: none; }
 }
 .ticket-tag { font-family: var(--mono); color: var(--amber); font-weight: 500; letter-spacing: 0.08em; font-size: 0.78rem; margin-bottom: 22px; }
